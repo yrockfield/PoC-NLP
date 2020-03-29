@@ -206,7 +206,7 @@ textarea {
   border-bottom: none !important;
   color: #ffffff;
   letter-spacing: 3px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #fh5co-logo a:hover {
   opacity: .7;
@@ -451,7 +451,7 @@ textarea {
   height: 3px;
   color: #252525;
   font: bold 14px/.4 Helvetica;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-indent: -55px;
   background: #252525;
   transition: all .2s ease-out;
@@ -627,7 +627,7 @@ textarea {
   border-bottom: none !important;
   color: #ccc;
   letter-spacing: 3px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 #fh5co-content {
@@ -667,7 +667,7 @@ textarea {
 #fh5co-sidebar .sidebar-heading {
   margin-bottom: 10px;
   font-size: 14px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 4px;
   color: #2e2e2e;
   position: relative;
@@ -792,7 +792,7 @@ textarea {
   letter-spacing: 4px;
   line-height: 1.5;
   font-size: 16px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   padding-bottom: 20px;
   position: relative;
   color: #ffffff;
@@ -953,7 +953,7 @@ body.fh5co-mobile-menu-visible #fh5co-mobile-menu {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   letter-spacing: 7px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   background: transparent;
   font-size: 16px;
   color: #000000;
@@ -1017,7 +1017,7 @@ body.fh5co-mobile-menu-visible #fh5co-mobile-menu {
 }
 #fh5co-footer .fh5co-footer-heading {
   font-size: 15px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 3px;
   color: #ccc;
   margin-bottom: 10px;
@@ -1632,13 +1632,13 @@ Components
 }
 .fh5co-pricing-table-1 .fh5co-pricing-table-item .fh5co-pricing-table-item-heading h3 sup, .fh5co-pricing-table-1 .fh5co-pricing-table-item .fh5co-pricing-table-item-heading h3 span {
   font-size: 14px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .fh5co-pricing-table-1 .fh5co-pricing-table-item .fh5co-pricing-table-item-heading p {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   letter-spacing: 3px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .fh5co-pricing-table-1 .fh5co-pricing-table-item.fh5co-best-offer .fh5co-pricing-table-item-heading {
   background: #57cecd;

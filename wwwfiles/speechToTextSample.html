@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -41,7 +41,7 @@
   	<link rel="shortcut icon" href="favicon.ico">
 
   	<!-- Google Webfont -->
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<!-- Themify Icons -->
 	<link rel="stylesheet" href="css/themify-icons.css">
 	<!-- Bootstrap -->
@@ -69,6 +69,13 @@
 
 	</head>
 	<body class="inner-page">
+		<!-- START #fh5co-header -->
+		<header id="fh5co-header-section" role="header" class="" >
+			<div class="container">
+					<h1 id="fh5co-logo" class="pull-left"><a href="index.html"><img src="images/logo.png" alt="Valet Free HTML5 Template"></a></h1>
+			</div>
+		</header>
+
 
 		<div id="fh5co-hero" style="background-image: url(images/slide_2.jpg);">
 			<div class="overlay"></div>
@@ -78,8 +85,8 @@
 				<div class="col-md-12">
 					<div class="fh5co-hero-wrap">
 						<div class="fh5co-hero-intro">
-							<h1 class="to-animate hero-animate-1">サンプル機能タイトル</h1>
-							<h2 class="to-animate hero-animate-2">サンプル機能の概要</h2>
+							<h1 class="to-animate hero-animate-1">Azure Coginitive Services Speechを利用した<br>音声からテキストへの機能</h1>
+							<h2 class="to-animate hero-animate-2">AzureのAI/機械学習系サービス Coginitive Servicesの中のSpeechサービスを利用し、音声（英語）をテキストに変換し表示する</h2>
 						</div>
 					</div>
 				</div>
@@ -89,42 +96,52 @@
 		<div id="fh5co-main">
 			<div id="fh5co-contact">
 			<div class="container">
+				<div style="display: none;">
+					<!-- 認証関連オブジェクト -->
+					<input id="subscriptionKey" type="text" size="40" value="subscription">
+					<input id="serviceRegion" type="text" size="40" value="YourServiceRegion">
+				</div>
+
 				<div class="row">
 					<div class="col-md-8">
 						<form action="#" method="post">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="name" class="sr-only">Email</label>
-									<input placeholder="Name" id="name" type="text" class="form-control input-lg">
+									<label for="targetaudio" >対象音声ファイル（英語）</label>
+									<input type="file" placeholder="音声ファイルを選択" id="targetaudio" ></input>
 								</div>	
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="email" class="sr-only">Email</label>
-									<input placeholder="Email" id="email" type="text" class="form-control input-lg">
-								</div>	
-							</div>
-							
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="message" class="sr-only">Message</label>
-									<textarea placeholder="Message" id="message" class="form-control input-lg" rows="3"></textarea>
-								</div>	
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<input type="submit" class="btn btn-primary btn-lg " value="Send">
+									<input type="button" id="startRecognizeOnceAsyncButton" class="btn btn-primary btn-lg " value="Send">
 
 								</div>	
 							</div>
-							
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="results" class="sr-only">変換後テキスト（英語）</label>
+									<textarea placeholder="変換後のテキストを表示" id="results" class="form-control input-lg" rows="12" readonly></textarea>
+								</div>	
+							</div>
 							
 						</form>	
 						
 					</div>
 					<div class="col-md-4">
 						<h3>操作説明</h3>
-						<p>テキストに日本語入れてボタンを押すとなんとかかんとか</p>
+						<p>
+							対象音声ファイルに英語音声ファイル（.wav）を選択し、「SEND」ボタンをクリックすると下のテキスト欄に音声から変換したテキスト（英語）が表示されます。
+						</p>
+						<p>
+							（注）Azure Speechサービスの制限により、対象の音声ファイルは以下の形式のみサポートされています。それ以外の形式のファイルは認識されません。
+							<ul>
+								<li>WAV形式</li>
+								<li>ビットレート：16ビット</li>
+								<li>サンプルレート：8KHz または 16KHz</li>
+								<li>チャンネル：1（モノラル）</li>
+							</ul>
+
+						</p>
 					</div>
 
 
@@ -147,7 +164,129 @@
 			</div>
 		</footer>
 			
-			
+		<!-- <speechsdkref> -->
+		<!-- Speech SDK reference sdk. -->
+		<script src="lib/microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+		<!-- </speechsdkref> -->
+
+		<!-- <authorizationfunction> -->
+		<!-- Speech SDK Authorization token -->
+		<script>
+		// Note: Replace the URL with a valid endpoint to retrieve
+		//       authorization tokens for your subscription.
+		var authorizationEndpoint = "php/tokenSpeech.php";
+
+		function RequestAuthorizationToken() {
+			if (authorizationEndpoint) {
+			var a = new XMLHttpRequest();
+			a.open("GET", authorizationEndpoint);
+			a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			a.send("");
+			a.onload = function() {
+				var token = JSON.parse(atob(this.responseText.split(".")[1]));
+				serviceRegion.value = token.region;
+				authorizationToken = this.responseText;
+				subscriptionKey.disabled = true;
+				subscriptionKey.value = "using authorization token (hit F5 to refresh)";
+				console.log("Got an authorization token: " + token);
+			}
+			}
+		}
+		</script>
+		<!-- </authorizationfunction> -->
+
+		<!-- <quickstartcode> -->
+		<!-- Speech SDK USAGE -->
+		<script>
+			// status fields and start button in UI
+			var startRecognizeOnceAsyncButton;
+
+			// subscription key and region for speech services.
+			var subscriptionKey, serviceRegion;
+			var authorizationToken;
+			var SpeechSDK;
+			var recognizer;
+			// Create the push stream we need for the speech sdk.
+			var pushStream = SpeechSDK.AudioInputStream.createPushStream(SpeechSDK.AudioStreamFormat.getDefaultInputFormat());
+
+			document.addEventListener("DOMContentLoaded", function () {
+				startRecognizeOnceAsyncButton = document.getElementById("startRecognizeOnceAsyncButton");
+				subscriptionKey = document.getElementById("subscriptionKey");
+				serviceRegion = document.getElementById("serviceRegion");
+				results = document.getElementById('results');
+
+				//ファイル選択されたタイミングで音声ファイルの中身を取得
+				targetaudio.addEventListener("change", function(event) {
+					const file = event.target.files;
+					//FileReaderのインスタンスを作成する
+					var reader = new FileReader();
+					// 0番目を読み込む
+					reader.readAsArrayBuffer(file[0]);
+
+					//ファイルの中身を取得後に処理を行う
+					reader.addEventListener( 'load', function() {
+					// fileReader.resultにデータが入る
+					console.log(reader.result);
+
+					pushStream.write(reader.result);
+					})
+				});
+
+				startRecognizeOnceAsyncButton.addEventListener("click", function () {
+					startRecognizeOnceAsyncButton.disabled = true;
+					results.value = "";
+
+					// if we got an authorization token, use the token. Otherwise use the provided subscription key
+					var speechConfig;
+					if (authorizationToken) {
+					speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, serviceRegion.value);
+					} else {
+					if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+						alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+						return;
+					}
+					speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value);
+					}
+
+					speechConfig.speechRecognitionLanguage = "en-US";
+
+					// Create the push stream we need for the speech sdk.
+			//        var pushStream = SpeechSDK.AudioInputStream.createPushStream(SpeechSDK.AudioStreamFormat.getDefaultInputFormat());
+
+			//        var audioConfig  = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+					var audioConfig = SpeechSDK.AudioConfig.fromStreamInput(pushStream);
+					recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+					recognizer.recognizeOnceAsync(
+					function (result) {
+						startRecognizeOnceAsyncButton.disabled = false;
+						results.value = result.text;
+						window.console.log(result);
+
+						recognizer.close();
+						recognizer = undefined;
+					},
+					function (err) {
+						startRecognizeOnceAsyncButton.disabled = false;
+						results.value = err;
+						window.console.log(err);
+
+						recognizer.close();
+						recognizer = undefined;
+					});
+				});
+
+				if (!!window.SpeechSDK) {
+					SpeechSDK = window.SpeechSDK;
+
+					// in case we have a function for getting an authorization token, call it.
+					if (typeof RequestAuthorizationToken === "function") {
+						RequestAuthorizationToken();
+					}
+				}
+			});
+		</script>
+
 		<!-- jQuery -->
 		<script src="js/jquery-1.10.2.min.js"></script>
 		<!-- jQuery Easing -->
@@ -165,8 +304,6 @@
 		<script src="js/easyResponsiveTabs.js"></script>
 		<!-- FastClick for Mobile/Tablets -->
 		<script src="js/fastclick.js"></script>
-		<!-- Parallax -->
-		<script src="js/jquery.parallax-scroll.min.js"></script>
 		<!-- Waypoints -->
 		<script src="js/jquery.waypoints.min.js"></script>
 

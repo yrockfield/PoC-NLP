@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -41,7 +41,7 @@
   	<link rel="shortcut icon" href="favicon.ico">
 
   	<!-- Google Webfont -->
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<!-- Themify Icons -->
 	<link rel="stylesheet" href="css/themify-icons.css">
 	<!-- Bootstrap -->
@@ -140,8 +140,9 @@
 									<li>Translatorサービスで処理された結果を受信し、翻訳語テキストエリアへ表示</li>
 								</ol>
 							</p>
-							Azure Translatorサービスの制限により、英文テキストは5000文字までとされており、それ以上のテキストを送信するとエラーが発生します。
+							（注）Azure Translatorサービスの制限により、英文テキストは5000文字までとされており、それ以上のテキストを送信するとエラーが発生します。
 						</p>
+						<p>英語テキストはなんでも構いませんが、スティーブ・ジョブズの<a href="https://www.americanrhetoric.com/speeches/stevejobsstanfordcommencement.htm" target="_blank">スタンフォード大学でのスピーチ</a>などいかがでしょうか？</p>
 					</div>
 
 
@@ -194,7 +195,6 @@
 
   <script>
     // status fields and start button in UI
-    var phraseDiv;
     var startTranslateButton;
 
     // subscription key and region for speech services.
@@ -209,7 +209,6 @@
       startTranslateButton = document.getElementById("startTranslateButton");
       subscriptionKey = document.getElementById("subscriptionKey");
       serviceRegion = document.getElementById("serviceRegion");
-      phraseDiv = document.getElementById("phraseDiv");
       targetText = document.getElementById('targetText');
       results = document.getElementById('results');
 /*

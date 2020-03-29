@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM php:7.0-apache
 
-COPY ./site.conf /etc/nginx/conf.d/default.conf
-COPY ./wwwfiles /var/wwwroot
+COPY ./docker-image-contents/etc_apache2_conf-enabled_docker-php.conf /etc/apache2/conf-enabled/docker-php.conf
+COPY ./wwwfiles/ /var/www/html/

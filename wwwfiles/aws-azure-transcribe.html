@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SystemThink Tech Group Cloud NLP Service PoC 2019/2020</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+
+  	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+	
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 	https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+  	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  	<link rel="shortcut icon" href="favicon.ico">
+
+  	<!-- Google Webfont -->
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<!-- Themify Icons -->
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<!-- Superfish -->
+	<link rel="stylesheet" href="css/superfish.css">
+	<!-- Easy Responsive Tabs -->
+	<link rel="stylesheet" href="css/easy-responsive-tabs.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body class="inner-page">
+		<!-- START #fh5co-header -->
+		<header id="fh5co-header-section" role="header" class="" >
+			<div class="container">
+					<h1 id="fh5co-logo" class="pull-left"><a href="index.html"><img src="images/logo.png" alt="Valet Free HTML5 Template"></a></h1>
+			</div>
+		</header>
+
+		<div id="fh5co-hero" style="background-image: url(images/slide_2.jpg);">
+			<div class="overlay"></div>
+			<a href="#fh5co-main" class="smoothscroll fh5co-arrow to-animate hero-animate-4"><i class="ti-angle-down"></i></a>
+			<!-- End fh5co-arrow -->
+			<div class="container">
+				<div style="display: none;">
+					<!-- 認証関連オブジェクト -->
+					<input id="subscriptionKey" type="text" size="40" value="subscription">
+					<input id="serviceRegion" type="text" size="40" value="YourServiceRegion">
+				</div>
+				<div class="col-md-12">
+					<div class="fh5co-hero-wrap">
+						<div class="fh5co-hero-intro">
+							<h1 class="to-animate hero-animate-1">AWSで英語音声テキスト変換、Azureで英日翻訳</h1>
+							<h2 class="to-animate hero-animate-2">AWS Transcribeにより、英語の音声ファイルを英語のテキストに変換後、Azure BLOB Storageに結果テキストを送信します。受信した英語テキストをAzure Translatorを利用して英語から日本語に翻訳し表示します。</h2>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+
+		<div id="fh5co-main">
+			<div id="fh5co-contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<form action="#" method="post">
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="targetaudio" >対象音声ファイル（英語）</label>
+									<input type="file" placeholder="音声ファイルを選択" id="targetaudio" ></input>
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+								    <input type="button" id="uploadFile" class="btn btn-primary btn-lg " value="UPLOAD">
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-8">
+									<image src="images/aws-logo-small.png" >
+								</div>	
+								<div class="col-md-4">
+								</div>	
+						</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="s3udioList">音声ファイルリスト（AWS S3バケット）</label>
+								    <div id="s3audioListUpdateStatus"></div>
+								    <div id="s3audioList"></div>
+									
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="s3resultList">変換後テキストファイルリスト（AWS S3バケット）</label>
+								    <div id="s3resultListUpdateStatus"></div>
+								    <div id="s3resultList"></div>
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<image src="images/azure-logo-small.png">
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="azureFileList">Azure側テキストファイルリスト（Azure BLOB Storage）</label>
+								    <div id="azureFileListUpdateStatus"></div>
+								    <div id="azureFileList"></div>
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<!-- <label for="targetText">
+										Azure側に保存されたテキストファイル（英語）をAzureの翻訳サービスで日本語に変換します。
+										<br/>
+										（注）Azureの翻訳サービス(Azure Translator)が5,000文字までしか対応していないため、本機能では5,000文字に切り取って表示・翻訳します。
+									</label> -->
+									<textarea placeholder="AWSより処理結果を受け取ると、このエリアに英語テキストが自動的に表示され、その内容を日本語翻訳し、以下に日本語訳が表示されます。" id="targetText" class="form-control input-lg" rows="12" readonly></textarea>
+								</div>	
+							</div>
+							<div class="col-md-12" style="display: none;">
+								<div class="form-group">
+									<input type="button" id="startTranslateButton" class="btn btn-primary btn-lg " value="Send">
+
+								</div>	
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="results" class="sr-only">翻訳処理後テキスト（日本語）</label>
+									<textarea placeholder="ここにはアップロードした英語音声を翻訳した日本語テキストが表示されます。" id="results" class="form-control input-lg" rows="12" readonly></textarea>
+								</div>	
+							</div>
+							
+						</form>	
+						
+					</div>
+					<div class="col-md-4">
+						<h3>操作説明</h3>
+						<p>対象音声ファイルに英語のスピーチ音声を指定し、アップロードするとAwSのS3ストレージに音声ファイルがアップロードされます。</p>
+						<p>AWS内では、その音声ファイルのアップロードをトリガーとして起動する関数（AWS Lambdaで構築）が設定されており、音声ファイルをTranscribeサービスでテキスト化し、テキストファイルをS3バケットに戻すようになっています。</p>
+						<br/>
+						<p>音声ファイルをアップロード後、数分で処理が完了し、AWS側の変換後テキストファイルリストに処理結果テキストファイルが追加されます。</p>
+						<br/>
+						<br/>
+						<p>その後、AWSからAzureへテキストファイルを送信する処理を行い、Azure側のファイルリストにも同じテキストファイルが追加されます。</p>
+						<p>Azure側のファイルリストのリンクをクリックするとテキストファイルを読み込み、表示するようになっていますので、受信した英語テキストをAzure側のTranslatorサービスで日本語に翻訳・表示することができます。</p>
+					</div>
+
+
+				</div>
+			</div>
+
+			</div>
+			<!-- fh5co-contact -->
+
+		
+		</div>
+		<!-- END fhtco-main -->
+
+
+		<footer role="contentinfo" id="fh5co-footer">
+			<a href="#" class="fh5co-arrow fh5co-gotop footer-box"><i class="ti-angle-up"></i></a>
+			<div class="container">
+				<!-- END row -->
+				<div class="fh5co-spacer fh5co-spacer-md"></div>
+			</div>
+		</footer>
+			
+        <script src="lib/aws-sdk.min.js"></script>
+		<script src="lib/azure-storage-blob.js"></script>
+		<script src="lib/common.js"></script>
+
+		<!-- Speech SDK Authorization token -->
+		<script>
+		// Note: Replace the URL with a valid endpoint to retrieve
+		//       authorization tokens for your subscription.
+		var authorizationEndpoint = "php/tokenTranslator.php";
+
+		function RequestAuthorizationToken() {
+			if (authorizationEndpoint) {
+			var a = new XMLHttpRequest();
+			a.open("GET", authorizationEndpoint);
+			a.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			a.send("");
+			a.onload = function() {
+				var token = JSON.parse(atob(this.responseText.split(".")[1]));
+				serviceRegion.value = token.region;
+				authorizationToken = this.responseText;
+				subscriptionKey.disabled = true;
+				subscriptionKey.value = "using authorization token (hit F5 to refresh)";
+				console.log("Got an authorization token: " + token);
+			}
+			}
+		}
+		</script>
+		<!-- </authorizationfunction> -->
+
+		<script>
+			//AWS S3側の情報
+			var audioBucketName = "systemthink-tech-poc-transcribe";
+			var resultBucketName = "systemthink-tech-poc-transcribe-results";
+			var bucketRegion = "ap-northeast-1";
+			var IdentityPoolId = "ap-northeast-1:b8335bb8-de41-4738-b47d-1bf841a760b5";
+
+			AWS.config.update({
+				region: bucketRegion,
+				credentials: new AWS.CognitoIdentityCredentials({
+					IdentityPoolId: IdentityPoolId
+				})
+			});
+
+			var s3_audioBucket = new AWS.S3({
+				apiVersion: "2006-03-01",
+				params: { Bucket: audioBucketName }
+			});
+			
+			var s3_resultBucket = new AWS.S3({
+				apiVersion: "2006-03-01",
+				params: { Bucket: resultBucketName }
+			});
+
+			//Azure BLOB Storage側の情報
+			const accountName = "pocnlpresults";
+			const sasString = "?sv=2019-02-02&ss=b&srt=sco&sp=rl&se=2022-03-31T14:59:59Z&st=2020-03-18T01:25:02Z&spr=https,http&sig=paUQ1KHNl71J1hlGmrUH1fFbqo5GgCXzyRMZ7xs7KnE%3D";
+			const containerName = "transcribe-text";
+			const containerURL = new azblob.ContainerURL(
+				`https://${accountName}.blob.core.windows.net/${containerName}?${sasString}`,
+				azblob.StorageURL.newPipeline(new azblob.AnonymousCredential));
+
+			//保存対象フォルダ名
+			var folderName = currentDateTimeString();
+			//S3バケット,Azure Storageのファイルリストを定期的に更新する
+			var listReloadIntervalSec = 10
+//			setInterval('viewS3AudioObject()',listReloadIntervalSec * 1000);
+			var s3IntarvalID = setInterval('viewS3ResultObject()',listReloadIntervalSec * 1000);
+			var azureIntarvalID = setInterval('viewAzureResultObject()',listReloadIntervalSec * 1000);
+
+			//S3バケット,Azure Storageのファイルリスト初期表示			
+			viewS3AudioObject();
+			viewS3ResultObject();
+			viewAzureResultObject();
+
+			var uploadFile = document.getElementById("uploadFile");
+
+			uploadFile.addEventListener("click", function () {
+				var targetaudio = document.getElementById("targetaudio");
+				var files = targetaudio.files;
+				if (!files.length) {
+					return alert("Please choose a file to upload first.");
+				}
+				var file = files[0];
+				var fileName = file.name;
+
+				var upObjKey =  fileName;
+
+				// Use S3 ManagedUpload class as it supports multipart uploads
+				var upload = new AWS.S3.ManagedUpload({
+					params: {
+						Bucket: audioBucketName,
+						Key:  folderName + "/" + upObjKey,
+						Body: file,
+						ACL: "public-read"
+					}
+				});
+
+				var promise = upload.promise();
+
+				promise.then(
+					function(data) {
+						alert("AWSのS3バケットへのファイルアップロードが完了しました。");
+						//S3バケット内の一覧再表示			
+						viewS3AudioObject();
+						viewS3ResultObject();
+						//一回アップロードしたらアップロードボタンdisabledにする
+						uploadFile.disabled = true;
+					},
+					function(err) {
+						console.log(err);
+						return alert("There was an error uploading your photo: " + err + ": " + err.message);
+					}
+				);
+			});
+
+			function viewS3AudioObject() {
+				// document.getElementById("s3audioListUpdateStatus").innerHTML = "現在AWS側の処理結果を待機中・・・";
+
+				s3_audioBucket.listObjects( function(err, data) {
+					if (err) {
+						return err.message;
+					}
+					// 'this' references the AWS.Response instance that represents the response
+					var href = this.request.httpRequest.endpoint.href;
+					var bucketUrl = href + "/" + audioBucketName + "/";
+
+					var objFiles = data.Contents.map(function(files) {
+						var objFileKey = files.Key;
+						if(objFileKey.lastIndexOf(folderName) > -1){
+							var objFileUrl = bucketUrl + encodeURIComponent(objFileKey);
+							return getHtml([
+								"<li>",
+								'<a href="' + objFileUrl + '">' + objFileKey + '</a>',
+								"</li>",
+							]);
+
+						}
+					});
+
+					if(objFiles){
+						document.getElementById("s3audioListUpdateStatus").innerHTML = "";
+					}
+					var htmlTemplate = [
+//					"<p>（" + listReloadIntervalSec + "秒ごとに更新されます）</p>",
+					"<ul>",
+						getHtml(objFiles),
+					"</ul>",
+					];
+					document.getElementById("s3audioList").innerHTML = getHtml(htmlTemplate);
+					// document.getElementById("s3audioListUpdateStatus").innerHTML = "";
+				});
+			}
+
+			function viewS3ResultObject() {
+				document.getElementById("s3resultListUpdateStatus").innerHTML = "";
+
+				s3_resultBucket.listObjects( function(err, data) {
+				if (err) {
+						return err.message;
+					}
+					// 'this' references the AWS.Response instance that represents the response
+					var href = this.request.httpRequest.endpoint.href;
+					var bucketUrl = href + "/" + resultBucketName + "/" + folderName + "/";
+
+					var objFiles = data.Contents.map(function(files) {
+						var objFileKey = files.Key;
+						if(objFileKey.lastIndexOf(folderName) > -1){
+							//txtファイルのみ表示
+							var ext = "";
+							var pos = objFileKey.lastIndexOf('.');
+							if (pos > -1)
+								ext = objFileKey.slice(pos + 1);
+							if( ext==="txt"){
+								var objFileUrl = bucketUrl + encodeURIComponent(objFileKey);
+								document.getElementById("s3resultListUpdateStatus").innerHTML = "AWS側の処理結果の受信完了";
+								clearInterval(s3IntarvalID);
+								return getHtml([
+									"<li>",
+									'<a href="' + objFileUrl + '">' + objFileKey + '</a>',
+									"</li>",
+								]);
+
+							}
+						}
+					});
+
+					if(	document.getElementById("s3resultListUpdateStatus").innerHTML == ""){
+						var htmlTemplate = [
+						"<p>（" + listReloadIntervalSec + "秒ごとに更新されます）</p>",
+						"<ul>",
+						getHtml(objFiles),
+						"</ul>",
+						];
+
+						document.getElementById("s3resultListUpdateStatus").innerHTML = "現在AWS側の処理結果を待機中・・・<p>※通常、音声アップロード後、1～2分程度かかります。</p>";
+					}else{
+						var htmlTemplate = [
+						"<ul>",
+						getHtml(objFiles),
+						"</ul>",
+						];
+					}
+					document.getElementById("s3resultList").innerHTML = getHtml(htmlTemplate);
+				});
+			}
+
+			async function viewAzureResultObject() {
+				document.getElementById("azureFileListUpdateStatus").innerHTML = "現在処理待機中・・・";
+				azureFileList = document.getElementById("azureFileList")
+
+				azureFileList.innerHTML = "";
+				try {
+					let marker = undefined;
+
+					do {
+						const listBlobsResponse = await containerURL.listBlobFlatSegment(
+							azblob.Aborter.none, marker);
+						marker = listBlobsResponse.nextMarker;
+						const items = listBlobsResponse.segment.blobItems;
+						for (const blob of items) {
+							if(blob.name.lastIndexOf(folderName) > -1){
+								//txtファイルのみ表示
+								var ext = "";
+								var pos = blob.name.lastIndexOf('.');
+								if (pos > -1)
+									ext = blob.name.slice(pos + 1);
+								if( ext==="txt"){
+									azureFileList.innerHTML = "<ul>";
+									azureFileList.innerHTML += "<li>" + blob.name + "</li>";
+									azureFileList.innerHTML += "</ul>";
+									document.getElementById("azureFileListUpdateStatus").innerHTML = "AWSより音声ファイルの変換テキスト（英語）を取得しました。以下に英語テキストとその翻訳結果が表示されます。";
+
+									clearInterval(azureIntarvalID);
+
+									getAzureText(blob.name);
+								}
+							}
+						}
+					} while (marker);
+
+					if(azureFileList.innerHTML == ""){
+						azureFileList.innerHTML += "<p>（" + listReloadIntervalSec + "秒ごとに更新されます）</p>";
+					}
+					// document.getElementById("azureFileListUpdateStatus").innerHTML = "";
+
+				} catch (error) {
+					return error;
+				}
+			};
+
+			async function getAzureText(blobName){
+				targetText = document.getElementById("targetText");
+
+				// Create a BlobURL
+				const blobURL = azblob.BlobURL.fromContainerURL(containerURL, blobName);
+				// Download blob
+				downloadBlobResponse = await blobURL.download(azblob.Aborter.none, 0);
+				// In browsers, get downloaded data by accessing downloadBlockBlobResponse.blobBody
+				var data =  await downloadBlobResponse.blobBody;
+
+				var reader = new FileReader();
+
+				reader.onload = function(){
+					targetText.value = reader.result.substring(0,5000);
+					startTranslateButton.click();
+				}
+
+				reader.readAsBinaryString(data);				
+
+			}
+
+			startTranslateButton.addEventListener("click", function () {
+				startTranslateButton.disabled = true;
+				results.value = "";
+
+				const requestJson = {"Text": targetText.value};
+
+				var requestURL = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
+				const req_from = "en";
+				const req_to = "ja";
+
+				requestURL += "&from=" + req_from + "&to=" + req_to;
+
+				const initParams = {
+				"method": "POST",
+				"headers": {
+					"Authorization": "Bearer " + authorizationToken,
+					"Content-Type": "application/json; charset=UTF-8",
+				},          
+				"body": JSON.stringify([requestJson]),
+				};
+
+				fetch(requestURL, initParams).then((response) => {
+				if(response.ok) { // ステータスがokならば
+					return response.json(); //responseのJSON=次のthenの引数dataに送られる
+				} else {
+					throw new Error();
+				}
+				})
+				.then((data) => {
+				console.log(JSON.stringify(data));
+				results.value = data[0].translations[0].text;
+				})
+				.catch((error) => console.log(error));
+
+				startTranslateButton.disabled = false;
+
+			});
+
+			// in case we have a function for getting an authorization token, call it.
+			if (typeof RequestAuthorizationToken === "function") {
+				RequestAuthorizationToken();
+			}
+
+			function getHtml(template) {
+				return template.join('\n');
+			}
+			
+		</script>
+			
+		<!-- jQuery -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<!-- jQuery Easing -->
+		<script src="js/jquery.easing.1.3.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.js"></script>
+		<!-- Owl carousel -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- Magnific Popup -->
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<!-- Superfish -->
+		<script src="js/hoverIntent.js"></script>
+		<script src="js/superfish.js"></script>
+		<!-- Easy Responsive Tabs -->
+		<script src="js/easyResponsiveTabs.js"></script>
+		<!-- FastClick for Mobile/Tablets -->
+		<script src="js/fastclick.js"></script>
+		<!-- Waypoints -->
+		<script src="js/jquery.waypoints.min.js"></script>
+
+		<!-- Main JS -->
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

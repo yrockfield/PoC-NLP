@@ -111,7 +111,7 @@
 
 						<p>
 							また、その他の技術要素として、サーバレス／FaaS（Function as a Service）やDockerコンテナの利用についてもあわせて検証を行っています。<br>
-							※このページは、Dockerコンテナ化したWEBサーバ（nginx）をAzure App ServiceのサーバレスDockerコンテナ環境で実行し、表示されています。
+							※このページは、Dockerコンテナ化したWEBサーバ（apache）をAzure App ServiceのサーバレスDockerコンテナ環境で実行し、表示されています。
 						</p>
 
 						<p>
@@ -125,52 +125,52 @@
 
 				<div class="row text-center" id="fh5co-features">
 					<div class="col-md-12 heading animate-box"><h2>サンプル機能一覧</h2></div>
-					<div class="col-md-12 heading animate-box"><h2>Azure</h2></div>
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box">
+
+					<!-- Azure - AWS 連携機能 -->
+					<div class="col-md-12 heading animate-box"><h2>- Azure － AWS 連携機能 -</h2></div>
+					<div class="col-md-12 col-sm-6 text-center fh5co-feature feature-box">
+						<a href="aws-azure-transcribe.html">
+							<h3 class="heading">AWSで英語音声テキスト変換、Azureで英日翻訳</h3>
+							<p>AWSサービスで英語音声をテキストに変換した結果をAzure側に送信し、その内容をAzure側のサービスで翻訳する</p>
+						</a>
+					</div>
+
+					<!-- 連携に利用した機能-->
+					<div class="col-md-12 heading animate-box"><h2>- 連携機能に利用したクラウドサービス -</h2></div>
+					<div class="col-md-6 col-sm-6 text-center fh5co-feature feature-box"> 
+						<a href="aws-browse-s3-to-transcribe.html">
+							<h3 class="heading">AWSを利用した<br>音声テキスト変換</h3>
+							<p>AWS Transcribeを利用したテキスト－＞音声変換サンプル</p>
+						</a>
+					</div>
+
+					<div class="clearfix visible-sm-block"></div>
+
+					<div class="col-md-6 col-sm-6 text-center fh5co-feature feature-box">
 						<a href="translatorSample.html">
 							<h3 class="heading">Azureを利用した<br>英日テキスト翻訳</h3>
 							<p>Azure Coginitive ServicesのTranslator利用サンプル</p>
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box"> 
-						<a href="translatorSample.html">
-							<h3 class="heading">Lock</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sunt porro delectus cum officia magnam. </p>
+
+					<!-- その他 -->
+					<div class="col-md-12 heading animate-box"><h2>- その他のクラウドサービス利用サンプル - </h2></div>
+					<div class="col-md-6 col-sm-6 text-center fh5co-feature feature-box"> 
+						<a href="speechToTextFromMicrophone.html">
+							<h3 class="heading">Azureを利用した<br>音声テキスト変換</h3>
+							<p>Azure Coginitive ServicesのSpeech利用サンプル</p>
 						</a>
 					</div>
 
 					<div class="clearfix visible-sm-block"></div>
 
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box"> 
-						<a href="translatorSample.html">
-							<h3 class="heading">Video</h3>
-							<p>Lor ipsum dolor sit amet consectetur adipisicing elit. Iste sunt porro delectus cum officia magnam.</p>
+					<div class="col-md-6 col-sm-6 text-center fh5co-feature feature-box">
+						<a href="aws-polly-sample.html">
+							<h3 class="heading">AWSを利用した<br>日本語テキスト読み上げ</h3>
+							<p>AWS Pollyを利用したテキスト－＞音声変換サンプル</p>
 						</a>
 					</div>
 
-					<div class="clearfix visible-md-block visible-lg-block"></div>
-
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box">
-						<a href="translatorSample.html">
-							<h3 class="heading">Shop</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sunt porro delectus cum officia magnam. </p>
-						</a>
-					</div>
-
-					<div class="clearfix visible-sm-block"></div>
-
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box"> 
-						<a href="translatorSample.html">
-							<h3 class="heading">Pallete</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sunt porro delectus cum officia magnam.</p>
-						</a>
-					</div>
-					<div class="col-md-4 col-sm-6 text-center fh5co-feature feature-box"> 
-						<a href="translatorSample.html">
-							<h3 class="heading">Deliver</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sunt porro delectus cum officia magnam.</p>
-						</a>
-					</div>
 				</div>
 				<!-- END row -->
 				
@@ -209,8 +209,6 @@
 		<script src="js/easyResponsiveTabs.js"></script>
 		<!-- FastClick for Mobile/Tablets -->
 		<script src="js/fastclick.js"></script>
-		<!-- Parallax -->
-		<script src="js/jquery.parallax-scroll.min.js"></script>
 		<!-- Waypoints -->
 		<script src="js/jquery.waypoints.min.js"></script>
 		<!-- Main JS -->
